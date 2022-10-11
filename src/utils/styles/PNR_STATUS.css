@@ -1,0 +1,11 @@
+.chartReport{
+    width: 100%;
+}
+.chartReport thead tr th,.chartReport tbody tr th{
+    margin: 0.2rem 1rem;
+    padding: 0.2rem 1rem;
+    text-align: center;
+}
+.chartReport tbody tr th{
+    font-weight: 400;
+}

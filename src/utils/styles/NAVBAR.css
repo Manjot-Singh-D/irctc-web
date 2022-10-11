@@ -1,0 +1,31 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 12vh;
+    position: fixed;
+    width: 100%;
+    z-index: 10001;
+    background: #ffffff;
+}
+.navbar .left, .navbar .right{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+}
+.navbar .right >*{
+    margin: 0.5rem 1rem;
+}
+.navbarHeading{
+    font-weight: 700;
+    font-size: 1rem;
+}
+.navbarButton{
+    background-color: #1D1AA7;
+    color: #ffffff;
+    border-radius: 69px;
+    display: flex;
+    justify-content: center;
+    width: 119px;
+}
