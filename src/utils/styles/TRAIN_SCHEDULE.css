@@ -1,0 +1,40 @@
+.table1{
+    scale: 0.9;
+    width: max-content;
+    margin: auto;
+}
+.table1 th{
+    text-align: center;
+    vertical-align: top;
+    margin: 0rem 1rem;
+    min-width: 4rem;
+    padding: 0.5rem;
+}
+.table1 th{
+    border: 1px solid #ffffff;
+}
+.table1 tr tr th{
+    border:0.5px solid #ffffff;
+}
+.table1 .tableRow2 th{
+    border: 0.5px solid #000000;
+}
+.table2{
+    margin-top: 1rem;
+    scale: 0.9;
+    border: 1px solid #000000;
+}
+.table2 .tableRow1 th{
+    border: 1px solid #ffffff;
+}
+.table2 thead tr th,.table2 tbody tr th{
+    text-align: center;
+    vertical-align: top;
+    margin: 0rem 0.5rem;
+    width: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #000000;
+}
+/* table tbody tr th{
+    text-align: center;
+} */

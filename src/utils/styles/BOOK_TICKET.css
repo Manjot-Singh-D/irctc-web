@@ -1,0 +1,18 @@
+.form_content{
+    margin: 0.5rem 1rem;
+}
+.form_content input:focus{
+    border: none;
+}
+.Dropdown-root{
+    width: 100%;
+}
+.Dropdown-control{
+    padding:0.5rem 1rem;
+    border:0.5px solid #00000060;
+    width:100%;
+    outline:none;
+}
+input[type=checkbox] {
+    accent-color: #0C098F;
+}

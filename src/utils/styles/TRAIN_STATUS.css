@@ -1,0 +1,9 @@
+.form_content{
+    margin: 0.5rem 1rem;
+}
+.form_content input:focus{
+    border: none;
+}
+.table1 thead tr th,.table1 tbody tr th{
+    border-bottom: 1px solid #000000;
+}

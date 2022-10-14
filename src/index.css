@@ -3,6 +3,17 @@
     margin: 0%;
 }
 #root{
-    width: 100vh;
-    height: 100vh;
+    width: 100vw;
+    min-height: 100vh;
+    height: max-content;
+    overflow-x: hidden;
+}
+html{
+    width: 100vw;
+    min-height: 100%;
+    height: max-content;
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none;
 }

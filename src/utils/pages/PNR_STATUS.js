@@ -7,7 +7,7 @@ import train_logo from "../assets/Images/train_logo.png"
 import "../styles/PNR_STATUS.css"
 
 const PNR_STATUS = () => {
-  const [showPNR,setShowPNR]=useState(false);
+  const [showPNR,setShowPNR]=useState(true);
   const [pnrDetails,setPnrDetails]=useState({});
   const detail={
     pnr:"1234567890",
@@ -60,15 +60,16 @@ const PNR_STATUS = () => {
             <h1 className='headingColor navbarHeading' style={{fontSize:"2.5rem",fontWeight:"700"}}>PNR STATUS</h1>
             <div style={{display:"flex",flexDirection:"row",justifyContent:"flex-start",alignItems:"center",margin:"1.5rem auto"}}>
               <input type={"text"} style={{padding:"0.5rem 1rem", border:"0.5px solid black"}}/>
-              <button style={{borderRadius:"0px",width:"max-content"}}>GO</button>
+              <button onClick={()=>setShowPNR(false)} style={{borderRadius:"0px",width:"max-content"}}>GO</button>
             </div>
             <p style={{fontSize:"0.9rem",color:"#00000090"}}>Enter your 10 digit PNR number to check IRCTC PNR Status of Indian Railways</p>
           </div>
           <div className='right' style={{padding:"2rem"}}>
-            <img src={pnr_status}/>
+            <img src={pnr_status} alt="pnr_status" loading="lazy"/>
           </div>
         </div>}
-        {!showPNR && <div className='mainContent' style={{background:"#ffffff",margin:"2rem",padding:"2rem",display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
+        {!showPNR && <div className='mainContent' style={{background:"#ffffff",position:"relative",margin:"2rem",padding:"2rem",display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
+          <p style={{fontSize:"3rem",position:"absolute",top:"0%",cursor:"pointer"}} onClick={()=>setShowPNR(true)}>&#8592;</p>
           <p style={{width:"100%", textAlign:"center",fontSize:"1.5rem",marginBottom:"2rem",fontWeight:"600"}}>PNR : {pnrDetails.pnr}</p>
           <div style={{marginTop:"1.5rem",width:"100%",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
             <div style={{width:"80%",fontWeight:"500",display:"flex",flexDirection:"row"}}>
@@ -123,4 +124,4 @@ const PNR_STATUS = () => {
   )
 }
 
-export default PNR_STATUS
+export default PNR_STATUS;

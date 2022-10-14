@@ -2,7 +2,7 @@
     color: #1D1AA7;
 }
 .mainContent{
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,12 +29,16 @@
     border-radius: 69px;
     width: 200px;
 }
+.mainContent button a{
+    color: #ffffff;
+    text-decoration: none;
+}
 .bgCarousel{
     width: 100%;
-    height: 87%;
+    /* height: 87%; */
 }
 .bgCarousel img{
-    width: 100%;
-    height: 87%;
+    width: 100vw;
+    height: 100vh;
     filter: brightness(60%);
 }
