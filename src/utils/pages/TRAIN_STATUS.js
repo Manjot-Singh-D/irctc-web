@@ -28,7 +28,7 @@ const TRAIN_STATUS = () => {
   
   const getFormatTrain=()=>{
     let ans=[];
-    // console.log(trains.data);
+  
     trains.data.map((val,key)=>{
       ans.push({label:val.properties.number+"_"+val.properties.name,value:key});
     });

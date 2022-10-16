@@ -44,7 +44,7 @@ const TRAIN_SCHEDULE = () => {
     }
     detail["trainNo"]=trainName.label.slice(0,5);
     detail["trainName"]=trainName.label.slice(6);
-    // console.log(detail);
+    
     setTrainDetails(detail);
     setShowTrain(false);
     let i=0;
@@ -58,7 +58,7 @@ const TRAIN_SCHEDULE = () => {
 
   const getFormatTrain=()=>{
     let ans=[];
-    // console.log(trains.data);
+    
     trains.data.map((val,key)=>{
       ans.push({label:val.properties.number+"_"+val.properties.name,value:key});
     });
