@@ -1,10 +1,20 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
+import ReactLoading from 'react-loading'
 import NAVBAR from "../components/NAVBAR"
 import "../styles/TRAIN_SCHEDULE.css"
+
+
+import trains from "../assets/data/trains";
+import Select from 'react-select'
 
 const TRAIN_SCHEDULE = () => {
   const [showTrain,setShowTrain]=useState(true);
   const [trainDetails,setTrainDetails]=useState({});
+  const [loading,setLoading]=useState(true);
+  // const train_number=useRef(null);
+  const [trainName,setTrainName]=useState("");
+  const [showError,setShowError]=useState(false);
+
   const detail={
     trainNo:"12303",
     trainName:"POORVA EXPRESS",
@@ -26,6 +36,36 @@ const TRAIN_SCHEDULE = () => {
   useEffect(()=>{
     setTrainDetails(detail);
   },[]);
+  const submitSchedule=()=>{
+    setShowError(false);
+    if(!trainName || trainName.label===""){
+      setShowError(true);
+      return ;
+    }
+    detail["trainNo"]=trainName.label.slice(0,5);
+    detail["trainName"]=trainName.label.slice(6);
+    // console.log(detail);
+    setTrainDetails(detail);
+    setShowTrain(false);
+    let i=0;
+    const interval = setInterval(() => {
+      i=i+1;
+      clearInterval(interval);
+      setShowTrain(false);
+      setLoading(false);
+    }, 1000);
+  }
+
+  const getFormatTrain=()=>{
+    let ans=[];
+    // console.log(trains.data);
+    trains.data.map((val,key)=>{
+      ans.push({label:val.properties.number+"_"+val.properties.name,value:key});
+    });
+    return ans;
+  }
+  const trainOption=getFormatTrain();
+
   return (
     <div style={{backgroundColor:"#1D1AA7",minHeight:"max-content",width:"100vw"}}>
       <NAVBAR/>
@@ -36,15 +76,20 @@ const TRAIN_SCHEDULE = () => {
             <p style={{fontSize:"0.9rem",color:"#00000090",fontWeight:"500"}}>Please enter few characters of Train Name OR few digits of Train Number.</p>
             <p style={{fontSize:"0.9rem",color:"#00000090",fontWeight:"500"}}>e.g. To get the train schedule for Himachal Express</p>
             <p style={{fontSize:"0.9rem",color:"#00000090",fontWeight:"500"}}> i.e. Train No. 14553 - either enter himachal or 145</p>
+            {showError && <p style={{color:"red",fontWeight:"600",marginBottom:"-2rem",marginTop:"1rem"}}>*Enter Valid Input</p>}
             <div style={{display:"flex",flexDirection:"row",justifyContent:"flex-start",alignItems:"center",margin:"1.5rem auto"}}>
-              <input type={"text"} style={{padding:"0.5rem 1rem", border:"0.5px solid #00000060",outline:"none"}}/>
-              <button onClick={()=>setShowTrain(false)} style={{borderRadius:"0px",width:"max-content"}}>Get Schedule</button>
+              {/* <input type={"text"} id="train_number" ref={train_number} style={{padding:"0.5rem 1rem", border:"0.5px solid #00000060",outline:"none"}}/> */}
+              <div style={{width:"50%"}}>
+                <Select value={trainName} onChange={(e)=>setTrainName(e)} options={trainOption} />
+              </div>
+              <button onClick={()=>submitSchedule()} style={{borderRadius:"0px",width:"max-content"}}>Get Schedule</button>
             </div>
+            
             <p style={{fontSize:"0.9rem",color:"#00000090"}}>*Train Schedule is shown only for reserved trains defined in the PRS system.</p>
           </div>
         </div>}
-        {!showTrain && typeof trainDetails !== 'undefined' && typeof trainDetails.days !== 'undefined' && <div className='mainContent' style={{background:"#ffffff",position:"relative",margin:"10% 2rem",padding:"2rem",display:"flex",justifyContent:"flex-start",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
-          <p style={{fontSize:"3rem",position:"absolute",top:"0%",cursor:"pointer"}} onClick={()=>setShowTrain(true)}>&#8592;</p>
+        {!showTrain && typeof trainDetails !== 'undefined' && typeof trainDetails.days !== 'undefined' && (loading===true?<ReactLoading className='reactLoading' type={"spin"} color={"#ffffff"} height={50} width={50} />: <div className='mainContent' style={{background:"#ffffff",position:"relative",margin:"10% 2rem",padding:"2rem",display:"flex",justifyContent:"flex-start",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
+          <p style={{fontSize:"3rem",position:"absolute",top:"0%",cursor:"pointer"}} onClick={()=>{setShowTrain(true);setLoading(true)}}>&#8592;</p>
           <p style={{width:"100%", textAlign:"center",fontSize:"1.5rem",marginBottom:"2rem",fontWeight:"600"}}>TRAIN SCHEDULE</p>
           <div style={{width:"100%",marginBottom:"0.5rem",padding:"0.5rem 0rem 1rem 0rem",display:"flex",justifyContent:"center",flexDirection:"column"}}>
             <table className='table1'>
@@ -121,7 +166,7 @@ const TRAIN_SCHEDULE = () => {
                 </tbody>
             </table>
           </div>
-        </div>}
+        </div>)}
       </div>
       
     </div>

@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
+import ReactLoading from 'react-loading'
 import NAVBAR from "../components/NAVBAR"
 import pnr_status from "../assets/Images/pnr_status.png"
 import chart_logo from "../assets/Images/chart_logo.png"
@@ -9,6 +10,10 @@ import "../styles/PNR_STATUS.css"
 const PNR_STATUS = () => {
   const [showPNR,setShowPNR]=useState(true);
   const [pnrDetails,setPnrDetails]=useState({});
+  const [loading,setLoading]=useState(true);
+  const [showError,setShowError]=useState(false);
+  // const pnr_number=useRef(null);
+  const [pnrNumber,setPnrNumber]=useState("");
   const detail={
     pnr:"1234567890",
     trainNo:"12958",
@@ -51,6 +56,25 @@ const PNR_STATUS = () => {
   useEffect(()=>{
     setPnrDetails(detail);
   },[]);
+  String.prototype.isNumber = function(){return /^\d+$/.test(this);}
+  const submitPNR=()=>{
+    setShowError(false);
+
+    if(pnrNumber==="" || pnrNumber.length!=10 || !pnrNumber.isNumber()){
+      setShowError(true);
+      return ;
+    }
+    detail["pnr"]=pnrNumber;
+    setPnrDetails(detail);
+    setShowPNR(false);
+    let i=0;
+    const interval = setInterval(() => {
+      i=i+1;
+      clearInterval(interval);
+      setShowPNR(false);
+      setLoading(false);
+    }, 1000);
+  }
   return (
     <div className="pnr_status" style={{backgroundColor:"#1D1AA7",height:"100vh",width:"100vw"}}>
       <NAVBAR/>
@@ -58,9 +82,10 @@ const PNR_STATUS = () => {
         {showPNR && <div className='mainContent' style={{background:"#ffffff",margin:"2rem"}} >
           <div className='left' style={{padding:"2rem"}}>
             <h1 className='headingColor navbarHeading' style={{fontSize:"2.5rem",fontWeight:"700"}}>PNR STATUS</h1>
+            {showError && <p style={{color:"red",fontWeight:"600",marginTop:"1rem",marginBottom:"-2rem"}}>*Enter Valid Input</p>}
             <div style={{display:"flex",flexDirection:"row",justifyContent:"flex-start",alignItems:"center",margin:"1.5rem auto"}}>
-              <input type={"text"} style={{padding:"0.5rem 1rem", border:"0.5px solid black"}}/>
-              <button onClick={()=>setShowPNR(false)} style={{borderRadius:"0px",width:"max-content"}}>GO</button>
+              <input type={"text"} id="pnr_number" value={pnrNumber} onChange={(e)=>setPnrNumber(e.target.value)} style={{padding:"0.5rem 1rem", border:"0.5px solid black"}}/>
+              <button onClick={()=> submitPNR()} style={{borderRadius:"0px",width:"max-content"}}>GO</button>
             </div>
             <p style={{fontSize:"0.9rem",color:"#00000090"}}>Enter your 10 digit PNR number to check IRCTC PNR Status of Indian Railways</p>
           </div>
@@ -68,8 +93,8 @@ const PNR_STATUS = () => {
             <img src={pnr_status} alt="pnr_status" loading="lazy"/>
           </div>
         </div>}
-        {!showPNR && <div className='mainContent' style={{background:"#ffffff",position:"relative",margin:"2rem",padding:"2rem",display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
-          <p style={{fontSize:"3rem",position:"absolute",top:"0%",cursor:"pointer"}} onClick={()=>setShowPNR(true)}>&#8592;</p>
+        {!showPNR && (loading===true?<ReactLoading className='reactLoading'  type={"spin"} color={"#ffffff"} height={50} width={50} />:<div className='mainContent' style={{background:"#ffffff",position:"relative",margin:"2rem",padding:"2rem",display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
+          <p style={{fontSize:"3rem",position:"absolute",top:"0%",cursor:"pointer"}} onClick={()=>{setShowPNR(true); setLoading(true)}}>&#8592;</p>
           <p style={{width:"100%", textAlign:"center",fontSize:"1.5rem",marginBottom:"2rem",fontWeight:"600"}}>PNR : {pnrDetails.pnr}</p>
           <div style={{marginTop:"1.5rem",width:"100%",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
             <div style={{width:"80%",fontWeight:"500",display:"flex",flexDirection:"row"}}>
@@ -117,7 +142,7 @@ const PNR_STATUS = () => {
             </div>
             
           </div>
-        </div>}
+        </div>)}
       </div>
       
     </div>

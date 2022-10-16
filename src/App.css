@@ -42,3 +42,7 @@
     height: 100vh;
     filter: brightness(60%);
 }
+
+.reactLoading{
+    margin: auto;
+}

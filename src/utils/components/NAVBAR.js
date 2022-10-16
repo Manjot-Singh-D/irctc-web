@@ -17,7 +17,7 @@ const NAVBAR = () => {
       </Link>
         
         <div className='right'>
-          <p className='headingColor navbarHeading'>CONTACT US</p>
+          <Link to="/"><p className='headingColor navbarHeading'>Home</p></Link>
           <Link style={{color:"#ffffff",textDecoration:"none"}} to="/login"><p className='navbarButton navbarHeading p-1 pl-3 pr-3'>LOGIN</p></Link>
           <Link to="/"><img src={railways_logo} alt="railways_logo"/></Link>
         </div>
