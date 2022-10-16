@@ -89,8 +89,8 @@ const PNR_STATUS = () => {
             </div>
             <p style={{fontSize:"0.9rem",color:"#00000090"}}>Enter your 10 digit PNR number to check IRCTC PNR Status of Indian Railways</p>
           </div>
-          <div className='right' style={{padding:"2rem"}}>
-            <img src={pnr_status} alt="pnr_status" loading="lazy"/>
+          <div className='right' style={{padding:"2rem",width:"max-content"}}>
+            <img src={pnr_status} alt="pnr_status" loading="lazy" style={{width:"300px"}}/>
           </div>
         </div>}
         {!showPNR && (loading===true?<ReactLoading className='reactLoading'  type={"spin"} color={"#ffffff"} height={50} width={50} />:<div className='mainContent' style={{background:"#ffffff",position:"relative",margin:"2rem",padding:"2rem",display:"flex",justifyContent:"center",alignItems:"flex-start",flexDirection:"column",minWidth:"70%"}} >
