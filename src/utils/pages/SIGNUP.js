@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import NAVBAR from '../components/NAVBAR'
 import "../styles/BOOK_TICKET.css"
 
-import 'react-dropdown/style.css';
 import { Link } from "react-router-dom";
 
 import show from "../assets/Images/show.png"

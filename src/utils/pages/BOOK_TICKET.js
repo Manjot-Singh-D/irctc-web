@@ -8,8 +8,6 @@ import Select from 'react-select'
 import "../styles/TRAIN_STATUS.css"
 import {Link} from "react-router-dom"
 
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 
 const BOOK_TICKET = () => {
 
